@@ -13,6 +13,7 @@ public class GamblingSimulator {
 
     private static final int WIN_LIMIT = 150;
     private static final int LOSS_LIMIT = 50;
+    private static final int DAYS_IN_MONTH = 20;
 
     public void initializeGame() {
 
@@ -44,6 +45,23 @@ public class GamblingSimulator {
     return currentStake;
     }
 
+    public void calculateMonthlyAmount() {
+
+    int totalAmount = 0;
+
+    for(int day=1; day<=DAYS_IN_MONTH; day++) {
+
+        int dailyResult =
+                playForDay() - STAKE;
+
+        totalAmount += dailyResult;
+    }
+
+    logger.info(
+            "Monthly Amount : $" +
+            totalAmount);
+    }
+
     public static void main(String[] args) {
 
         GamblingSimulator gambler =
@@ -64,5 +82,7 @@ public class GamblingSimulator {
         logger.info(
         "Final Stake : $" +
                 finalStake);
+        
+        gambler.calculateMonthlyAmount();
     }
 }
