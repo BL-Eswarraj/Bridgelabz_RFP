@@ -11,13 +11,16 @@ public class GamblingSimulator {
 
     private final Random random = new Random();
 
+    private static final int WIN_LIMIT = 150;
+    private static final int LOSS_LIMIT = 50;
+
     public void initializeGame() {
 
         logger.info("Daily Stake : $" + STAKE);
         logger.info("Bet Amount : $" + BET_AMOUNT);
     }
 
-    
+    // UC2
     public int playBet() {
 
     if (random.nextBoolean()) {
@@ -25,6 +28,20 @@ public class GamblingSimulator {
     }
 
     return -BET_AMOUNT;
+    }
+
+    // UC3
+    public int playForDay() {
+
+    int currentStake = STAKE;
+
+    while (currentStake > LOSS_LIMIT &&
+            currentStake < WIN_LIMIT) {
+
+        currentStake += playBet();
+    }
+
+    return currentStake;
     }
 
     public static void main(String[] args) {
@@ -40,5 +57,12 @@ public class GamblingSimulator {
                 result > 0 ?
                 "Won $1" :
                 "Lost $1");
+        
+        int finalStake =
+        gambler.playForDay();
+
+        logger.info(
+        "Final Stake : $" +
+                finalStake);
     }
 }
