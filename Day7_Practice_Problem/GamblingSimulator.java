@@ -49,18 +49,33 @@ public class GamblingSimulator {
 
     int totalAmount = 0;
 
+    int wonDays = 0;
+    int lostDays = 0;
+
     for(int day=1; day<=DAYS_IN_MONTH; day++) {
 
         int dailyResult =
                 playForDay() - STAKE;
 
         totalAmount += dailyResult;
+
+        if(dailyResult > 0)
+            wonDays++;
+        else
+            lostDays++;
     }
 
     logger.info(
+            "Won Days : " + wonDays);
+
+    logger.info(
+            "Lost Days : " + lostDays);
+
+    logger.info(
             "Monthly Amount : $" +
-            totalAmount);
+                    totalAmount);
     }
+
 
     public static void main(String[] args) {
 
