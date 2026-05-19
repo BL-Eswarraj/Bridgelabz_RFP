@@ -45,7 +45,7 @@ public class GamblingSimulator {
     return currentStake;
     }
 
-    public void calculateMonthlyAmount() {
+    public int calculateMonthlyAmount() {
 
     int totalAmount = 0;
 
@@ -100,7 +100,21 @@ public class GamblingSimulator {
     logger.info(
         "Unluckiest Day : " +
         unluckiestDay);
+
+    return totalAmount;
     }
+
+
+    public void continueGambling() {
+
+    int totalAmount;
+
+    do {
+
+        totalAmount = calculateMonthlyAmount();
+
+    } while(totalAmount > 0);
+        }
 
 
     public static void main(String[] args) {
@@ -125,5 +139,6 @@ public class GamblingSimulator {
                 finalStake);
         
         gambler.calculateMonthlyAmount();
+        gambler.continueGambling();
     }
 }
