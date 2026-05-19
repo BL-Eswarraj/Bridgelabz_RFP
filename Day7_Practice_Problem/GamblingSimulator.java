@@ -52,6 +52,12 @@ public class GamblingSimulator {
     int wonDays = 0;
     int lostDays = 0;
 
+    int maximumWin=Integer.MIN_VALUE;
+    int maximumLoss=Integer.MAX_VALUE;
+
+    int luckiestDay=0;
+    int unluckiestDay=0;
+
     for(int day=1; day<=DAYS_IN_MONTH; day++) {
 
         int dailyResult =
@@ -63,6 +69,18 @@ public class GamblingSimulator {
             wonDays++;
         else
             lostDays++;
+
+        if(dailyResult > maximumWin){
+
+            maximumWin=dailyResult;
+            luckiestDay=day;
+        }
+
+        if(dailyResult < maximumLoss){
+
+            maximumLoss=dailyResult;
+            unluckiestDay=day;
+        }
     }
 
     logger.info(
@@ -74,6 +92,14 @@ public class GamblingSimulator {
     logger.info(
             "Monthly Amount : $" +
                     totalAmount);
+    
+    logger.info(
+        "Luckiest Day : " +
+        luckiestDay);
+
+    logger.info(
+        "Unluckiest Day : " +
+        unluckiestDay);
     }
 
 
