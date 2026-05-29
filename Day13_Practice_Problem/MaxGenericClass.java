@@ -13,3 +13,4 @@ public class MaxGenericClass <T extends Comparable<T>>{
         return MaxNumber.maxValue(a, b, c);
     }
 }
+
